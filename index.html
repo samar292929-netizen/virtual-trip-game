@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eef6ff">
+  <title>رحلة بوصلة التفكير</title>
+  <style>
+    :root{font-family:"Tahoma","Arial",sans-serif;color:#17324d;background:#eef6ff;font-synthesis:none;text-rendering:optimizeLegibility}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 8% 12%,#fff5d8 0 8%,transparent 25%),radial-gradient(circle at 92% 78%,#e0f8ef 0 10%,transparent 26%),#eef6ff}
+    button{font:inherit}.page{width:min(920px,100%);margin:auto;padding:26px 18px 42px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.brand{font-weight:900;color:#3650a5;font-size:1.04rem}.sound{border:1px solid #d5e0f0;background:#fff;border-radius:999px;padding:9px 13px;color:#304765;cursor:pointer}
+    .hero{text-align:center;padding:20px 10px 24px}.badge{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid #e4eaf3;border-radius:999px;padding:8px 14px;color:#526682;font-size:.9rem}.hero h1{font-size:clamp(2rem,6vw,3.55rem);line-height:1.15;margin:15px 0 10px;color:#243b82}.hero p{margin:0 auto;color:#5b6d84;max-width:570px;line-height:1.9}
+    .game{background:#fff;border:1px solid #e2eaf5;border-radius:26px;box-shadow:0 18px 50px #35537a12;overflow:hidden}.hud{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px;border-bottom:1px solid #edf1f7}.level-label{font-weight:800;color:#324b72}.stars{color:#e5a317;font-weight:900;letter-spacing:2px}.progress{height:8px;background:#edf2f8}.progress span{height:100%;display:block;background:linear-gradient(90deg,#61c8a6,#6f8df4);width:0;transition:width .4s;border-radius:0 8px 8px 0}
+    .scene{padding:clamp(22px,6vw,44px);text-align:center}.scene-icon{width:90px;height:90px;margin:0 auto 15px;display:grid;place-items:center;background:#f1f3ff;border-radius:28px;font-size:3.1rem}.scene h2{color:#283f83;font-size:clamp(1.35rem,4vw,1.8rem);margin:0 0 12px}.question{font-size:1.12rem;line-height:1.9;color:#344a65;max-width:650px;margin:0 auto 22px}.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:680px;margin:0 auto}.answer{border:2px solid #e5ebf4;background:#fff;color:#29425e;border-radius:17px;padding:15px 14px;min-height:67px;cursor:pointer;transition:transform .15s,border-color .15s,background .15s}.answer:hover:not(:disabled){transform:translateY(-2px);border-color:#8498ee;background:#f8f9ff}.answer:focus-visible,.sound:focus-visible,.primary:focus-visible,.secondary:focus-visible{outline:3px solid #f4c550;outline-offset:3px}.answer:disabled{cursor:default}.answer.correct{border-color:#53bd91;background:#edfbf4}.answer.wrong{border-color:#ef8d8d;background:#fff2f1}.feedback{min-height:67px;max-width:680px;margin:18px auto 0;padding:14px 17px;border-radius:15px;line-height:1.8;text-align:right;display:none}.feedback.show{display:block}.feedback.good{background:#edfbf4;color:#226b4f}.feedback.try{background:#fff6e6;color:#805b1a}.actions{display:flex;justify-content:center;gap:10px;margin-top:18px}.primary,.secondary{border:0;border-radius:14px;padding:13px 22px;font-weight:800;cursor:pointer}.primary{color:white;background:#5269d8;box-shadow:0 7px 15px #5269d833}.primary:hover{background:#4057c4}.secondary{background:#f0f3f8;color:#52647a}.hidden{display:none!important}.finish{padding:42px 25px;text-align:center}.finish .trophy{font-size:4rem}.finish h2{font-size:2rem;color:#283f83;margin:10px 0}.finish p{line-height:1.9;color:#586b83;max-width:520px;margin:0 auto 20px}.footer{text-align:center;color:#708198;font-size:.86rem;padding:17px 5px 0}
+    @media(max-width:560px){.page{padding:16px 12px 30px}.hud{padding:15px}.answers{grid-template-columns:1fr}.answer{min-height:58px}.hero{padding:18px 5px 20px}.scene{padding:24px 17px}.scene-icon{width:76px;height:76px;font-size:2.6rem}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar"><div class="brand">🧭 نادي المفكّرين الصغار</div><button class="sound" id="soundBtn" type="button" aria-pressed="false">🔈 الصوت: متوقف</button></header>
+    <section class="hero"><div class="badge">✨ لعبة آمنة للتعلّم والتفكير</div><h1>رحلة بوصلة التفكير</h1><p>انطلق في مغامرة قصيرة، وتعلّم كيف تسأل وتتحقّق وتستمع للآخرين. كل إجابة فرصة جديدة للتعلّم!</p></section>
+    <section class="game" aria-label="اللعبة التفاعلية">
+      <div id="playArea"><div class="hud"><span class="level-label" id="levelLabel">المحطة ١ من ٥</span><span class="stars" id="stars" aria-label="عدد النجوم">☆ ☆ ☆ ☆ ☆</span></div><div class="progress" role="progressbar" aria-label="التقدم في اللعبة" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><span id="progressBar"></span></div>
+        <div class="scene"><div class="scene-icon" id="icon" aria-hidden="true">🔎</div><h2 id="title"></h2><p class="question" id="question"></p><div class="answers" id="answers"></div><div class="feedback" id="feedback" role="status" aria-live="polite"></div><div class="actions"><button class="primary hidden" id="nextBtn" type="button">المحطة التالية ←</button></div></div>
+      </div>
+      <div class="finish hidden" id="finish" aria-live="polite"><div class="trophy">🏆</div><h2>أحسنت يا بطل التفكير!</h2><p id="finishText"></p><button class="primary" id="restartBtn" type="button">العب من جديد ↻</button></div>
+    </section>
+    <p class="footer">تذكّر: فكّر، اسأل، تحقّق، واحكِ مع شخص بالغ تثق به عند الحاجة. 💛</p>
+  </main>
+<script>
+  const stations = [
+    {icon:'🔎',title:'مكتبة الحقائق',question:'قرأتَ: «تحتاج النباتات إلى الماء كي تنمو». ما أفضل طريقة لمعرفة إن كانت هذه معلومة صحيحة؟',answers:['أبحث في كتاب موثوق أو أسأل معلّمي','أصدّقها فوراً لأن صديقي قالها','أختار الإجابة التي تبدو أجمل'],correct:0,tip:'رائع! نتحقّق من المعلومات بمصادر موثوقة، مثل الكتب والمعلّمين.'},
+    {icon:'📱',title:'جزيرة الرسائل',question:'وصلتك رسالة من شخص لا تعرفه يطلب اسم مدرستك وصورتك. ماذا تفعل؟',answers:['أرسلها بسرعة كي لا يغضب','لا أشاركها، وأخبر شخصاً بالغاً أثق به','أرسلها إلى مجموعة الصف'],correct:1,tip:'اختيار آمن! معلوماتك وصورك خاصة، ومن الجيد إخبار شخص بالغ موثوق.'},
+    {icon:'🗣️',title:'جسر الآراء',question:'اختلف صديقك معك في رأيه عن قصة قرأتماها. ما التصرف الأفضل؟',answers:['أستمع إلى رأيه وأشرح رأيي بلطف','أقول له إن رأيه خطأ ولا أسمعه','أغضب وأترك المكان'],correct:0,tip:'أحسنت! يمكن أن نختلف ونبقى أصدقاء. الاستماع يساعدنا على فهم أفكار جديدة.'},
+    {icon:'🧩',title:'لغز الخبر العجيب',question:'رأيت عنواناً يقول: «اكتشاف مذهل سيغيّر كل شيء!». ماذا تفعل قبل مشاركة الخبر؟',answers:['أشاركه فوراً لأن عنوانه مشوّق','أتحقّق من مصدره وأقرأ أكثر من العنوان','أضيف إليه تفاصيل من عندي'],correct:1,tip:'تفكير ممتاز! العنوان وحده لا يكفي؛ تحقّق من المصدر واقرأ التفاصيل أولاً.'},
+    {icon:'💡',title:'ساحة الأسئلة',question:'سمعت فكرة جديدة ولم تفهمها. ما أفضل خطوة؟',answers:['أسأل بهدوء: هل يمكنك أن تشرح أكثر؟','أرفضها فوراً دون أن أعرف عنها','أكررها للآخرين حتى لو لم أفهمها'],correct:0,tip:'يا لها من خطوة ذكية! السؤال بأدب يساعدنا على التعلّم واتخاذ قرارات أفضل.'}
+  ];
+  let current=0, score=0, soundOn=false;
+  const $=id=>document.getElementById(id);
+  function render(){
+    const s=stations[current]; $('levelLabel').textContent=`المحطة ${['١','٢','٣','٤','٥'][current]} من ٥`;
+    $('stars').textContent=stations.map((_,i)=>i<score?'★':'☆').join(' '); $('icon').textContent=s.icon; $('title').textContent=s.title; $('question').textContent=s.question;
+    $('feedback').className='feedback'; $('feedback').textContent=''; $('nextBtn').classList.add('hidden');
+    const box=$('answers');box.replaceChildren();
+    s.answers.forEach((text,i)=>{const b=document.createElement('button');b.type='button';b.className='answer';b.textContent=text;b.addEventListener('click',()=>choose(i));box.append(b)});
+    const pct=(current/stations.length)*100;$('progressBar').style.width=`${pct}%`;document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow',current);
+  }
+  function choose(index){
+    const s=stations[current], buttons=[...$('answers').children];buttons.forEach(b=>b.disabled=true);
+    const right=index===s.correct;buttons[s.correct].classList.add('correct');if(!right)buttons[index].classList.add('wrong');if(right)score++;
+    const f=$('feedback');f.textContent=(right?'⭐ إجابة رائعة! ':'💛 لا بأس، نتعلّم معاً! ')+s.tip;f.classList.add('show',right?'good':'try');
+    $('nextBtn').textContent=current===stations.length-1?'عرض النتيجة 🏆':'المحطة التالية ←';$('nextBtn').classList.remove('hidden');if(soundOn)speak(right?'أحسنت!':'حاول مرة أخرى');
+  }
+  function next(){current++;if(current>=stations.length){$('playArea').classList.add('hidden');$('finish').classList.remove('hidden');$('finishText').textContent=`جمعت ${score} من ٥ نجوم! تذكّر دائماً: تحقّق من المعلومات، واحمِ خصوصيتك، واستمع باحترام. ${score===5?'أنت بوصلة تفكير رائعة!':'كل محاولة تعلّم جديد، ويمكنك اللعب مرة أخرى لتحصل على نجوم أكثر.'}`;return}render()}
+  function speak(text){if('speechSynthesis'in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='ar-SA';speechSynthesis.speak(u)}}
+  $('nextBtn').addEventListener('click',next);$('restartBtn').addEventListener('click',()=>{current=0;score=0;$('finish').classList.add('hidden');$('playArea').classList.remove('hidden');render()});
+  $('soundBtn').addEventListener('click',()=>{soundOn=!soundOn;$('soundBtn').setAttribute('aria-pressed',String(soundOn));$('soundBtn').textContent=soundOn?'🔊 الصوت: يعمل':'🔈 الصوت: متوقف';if(!soundOn&&'speechSynthesis'in window)speechSynthesis.cancel()});
+  render();
+</script>
+</body>
+</html>
